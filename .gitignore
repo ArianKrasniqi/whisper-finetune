@@ -1,0 +1,24 @@
+venv/
+*.zip
+.claude/
+
+# Audio and video files (will be large)
+*.mp3
+*.mp4
+*.wav
+*.m4a
+*.webm
+
+# Model checkpoints (very large)
+checkpoints/
+models/
+
+# Dataset files
+data/
+*.arrow
+*.parquet
+
+# Python
+__pycache__/
+*.pyc
+.DS_Store
