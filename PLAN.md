@@ -107,8 +107,8 @@ Week 3: 30 videos total → retrain → model v3
 ## Current Status
 
 - [x] Plan created
-- [ ] Step 1: Install tools
-- [ ] Step 2: Baseline test
+- [x] Step 1: Install tools
+- [x] Step 2: Baseline test (output saved in samples/baseline/)
 - [ ] Step 3: Forced alignment working
 - [ ] Step 4: Training dataset built
 - [ ] Step 5: First fine-tuned model

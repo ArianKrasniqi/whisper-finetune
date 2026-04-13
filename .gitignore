@@ -2,6 +2,8 @@ venv/
 *.zip
 .claude/
 
+samples/
+
 # Audio and video files (will be large)
 *.mp3
 *.mp4
