@@ -110,7 +110,7 @@ Week 3: 30 videos total → retrain → model v3
 - [x] Step 1: Install tools
 - [x] Step 2: Baseline test (output saved in samples/baseline/)
 - [x] Step 3: Forced alignment working (aligned.json produced per video)
-- [ ] Step 4: Training dataset built
-- [ ] Step 5: First fine-tuned model
-- [ ] Step 6: Quality comparison
+- [x] Step 4: Training dataset built (28 segments from video1)
+- [x] Step 5: First fine-tuned model (models/whisper-small-albanian)
+- [x] Step 6: Quality comparison (samples/v1/ vs samples/baseline/)
 - [ ] Step 7: Full pipeline script

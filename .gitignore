@@ -24,3 +24,5 @@ data/
 __pycache__/
 *.pyc
 .DS_Store
+
+/OVERVIEW.md

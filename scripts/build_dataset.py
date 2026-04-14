@@ -2,12 +2,12 @@ import argparse
 import json
 import os
 import subprocess
-from datasets import Dataset, Audio
+from datasets import Dataset
 
 def slice_audio(audio_path, start, end, output_path):
     """Use ffmpeg to slice a chunk from the audio file."""
     subprocess.run([
-        "/usr/local/bin/ffmpeg", "-y",
+        "ffmpeg", "-y",
         "-i", audio_path,
         "-ss", str(start),
         "-to", str(end),
@@ -50,10 +50,12 @@ def main():
         wav_paths.append(wav_path)
         texts.append(text)
 
-        # Optionally save as mp3 chunk for review
+        # Optionally convert the wav chunk to mp3 for review
         if args.chunks_dir:
             chunk_mp3 = os.path.join(args.chunks_dir, f"chunk_{i:03d}_{start:.1f}-{end:.1f}s.mp3")
-            slice_audio(args.audio, start, end, chunk_mp3)
+            subprocess.run([
+                "ffmpeg", "-y", "-i", wav_path, chunk_mp3
+            ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
         print(f"  [{i+1}/{len(segments)}] {start:.2f}s - {end:.2f}s: {text[:50]}")
 
@@ -62,7 +64,6 @@ def main():
         "audio": wav_paths,
         "text": texts
     })
-    dataset = dataset.cast_column("audio", Audio(sampling_rate=16000))
     dataset.save_to_disk(args.output_dir)
 
     print(f"\nDone. Dataset saved to {args.output_dir}")

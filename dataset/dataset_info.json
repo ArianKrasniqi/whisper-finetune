@@ -3,8 +3,8 @@
   "description": "",
   "features": {
     "audio": {
-      "sampling_rate": 16000,
-      "_type": "Audio"
+      "dtype": "string",
+      "_type": "Value"
     },
     "text": {
       "dtype": "string",
