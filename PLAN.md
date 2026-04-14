@@ -109,7 +109,7 @@ Week 3: 30 videos total → retrain → model v3
 - [x] Plan created
 - [x] Step 1: Install tools
 - [x] Step 2: Baseline test (output saved in samples/baseline/)
-- [ ] Step 3: Forced alignment working
+- [x] Step 3: Forced alignment working (aligned.json produced per video)
 - [ ] Step 4: Training dataset built
 - [ ] Step 5: First fine-tuned model
 - [ ] Step 6: Quality comparison
