@@ -12,20 +12,69 @@ source venv/bin/activate
 
 ### `scripts/baseline.sh` — Download + transcribe a video
 
-Downloads audio from a YouTube URL and runs a baseline Whisper transcription on it.
-
 ```bash
-chmod +x scripts/baseline.sh  # only needed once
+chmod +x scripts/baseline.sh
 ./scripts/baseline.sh "<youtube_url>" "<output_name>"
 ```
 
-Example:
+---
+
+### `scripts/align.py` — Forced alignment
+
 ```bash
-./scripts/baseline.sh "https://www.youtube.com/shorts/4arPW5Qc9DI" "sample"
+python scripts/align.py --audio data/video1/audio.mp3 --output_dir data/video1/
 ```
 
-Output files are saved in `samples/baseline/` as `.mp3`, `.txt`, `.srt`, `.vtt`, `.tsv`, and `.json`.
+---
 
-## See Also
+### `scripts/realign_words.py` — Re-align words after text correction
 
-- `PLAN.md` — full 7-step project plan and progress tracker
+```bash
+python scripts/realign_words.py --input data/video1/aligned-adjusted.json --audio data/video1/audio.mp3
+```
+
+---
+
+### `scripts/build_dataset.py` — Build training dataset
+
+```bash
+python scripts/build_dataset.py --aligned data/video1/aligned-adjusted.json --audio data/video1/audio.mp3 --output_dir dataset/ --chunks_dir data/video1/chunks/
+```
+
+---
+
+### `scripts/train.py` — Fine-tune whisper-small
+
+```bash
+python scripts/train.py
+```
+
+---
+
+### `scripts/transcribe.py` — Transcribe audio with fine-tuned model
+
+```bash
+python scripts/transcribe.py --audio data/video1/audio.mp3 --model models/whisper-small-albanian
+```
+
+---
+
+## Adding New Training Data
+
+Each new video goes in its own folder:
+
+```
+data/
+  video1/
+  video2/
+  video3/
+```
+
+For each new video:
+1. Download audio with `baseline.sh`
+2. Run `align.py`
+3. Correct text → save as `aligned-adjusted.json`
+4. Run `realign_words.py`
+5. Listen to chunks, remove bad segments
+6. Rebuild dataset with `build_dataset.py`
+7. Retrain with `train.py`
